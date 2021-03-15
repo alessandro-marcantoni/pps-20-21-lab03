@@ -16,4 +16,6 @@ object Lists {
     case _ => Nil()
   }
 
+  def map[A, B](list: List[A])(mapper: A => B): List[B] = flatMap(list)(a => Cons(mapper(a), Nil()))
+
 }
