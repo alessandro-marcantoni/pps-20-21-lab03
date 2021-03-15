@@ -2,6 +2,7 @@ package lab03
 
 import lab03.Lists._
 import u03.Lists.List.{Cons, Nil}
+import u02.Optionals.Option.{Some, None}
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -38,6 +39,12 @@ class ListsTest {
   def filterTest(): Unit = {
     assertEquals(Nil(), filter(lst)(_%10 != 0))
     assertEquals(Cons(10, Cons(20, Nil())), filter(lst)(_<25))
+  }
+
+  @Test
+  def maxTest(): Unit = {
+    assertEquals(Some(25), max(Cons(10, Cons(25, Cons(20, Nil())))))
+    assertEquals(None(), max(Nil()))
   }
 
 }
