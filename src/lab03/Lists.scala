@@ -18,4 +18,9 @@ object Lists {
 
   def map[A, B](list: List[A])(mapper: A => B): List[B] = flatMap(list)(a => Cons(mapper(a), Nil()))
 
+  def filter[A](list: List[A])(predicate: A => Boolean): List[A] = flatMap(list) {
+    case a if predicate(a) => Cons(a, Nil())
+    case _ => Nil()
+  }
+
 }

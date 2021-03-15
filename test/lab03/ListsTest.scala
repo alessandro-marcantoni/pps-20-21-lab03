@@ -34,4 +34,10 @@ class ListsTest {
     assertEquals(Cons(5, Cons(10, Cons(15, Nil()))), map(lst)(_/2))
   }
 
+  @Test
+  def filterTest(): Unit = {
+    assertEquals(Nil(), filter(lst)(_%10 != 0))
+    assertEquals(Cons(10, Cons(20, Nil())), filter(lst)(_<25))
+  }
+
 }
