@@ -2,9 +2,11 @@ package lab03
 
 import lab03.Lists._
 import u03.Lists.List.{Cons, Nil}
-import u02.Optionals.Option.{Some, None}
+import u02.Optionals.Option.{None, Some}
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import u02.Modules.Person
+import u02.Modules.Person.{Student, Teacher}
 
 class ListsTest {
 
@@ -45,6 +47,19 @@ class ListsTest {
   def maxTest(): Unit = {
     assertEquals(Some(25), max(Cons(10, Cons(25, Cons(20, Nil())))))
     assertEquals(None(), max(Nil()))
+  }
+
+  @Test
+  def listWithPeopleTest(): Unit = {
+    val people:Cons[Person] = Cons(Teacher("Viroli", "PPS"),
+        Cons(Teacher("Ricci", "PCD"),
+        Cons(Teacher("Mirri", "ASW"),
+        Cons(Student("Alessandro", 2020),
+        Cons(Student("Simone", 2020), Nil())))))
+    assertEquals(
+      Cons("PPS", Cons("PCD", Cons("ASW", Nil()))),
+      getTeacherCourses(people)
+    )
   }
 
 }

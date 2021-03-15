@@ -1,5 +1,7 @@
 package lab03
 
+import u02.Modules.Person
+import u02.Modules.Person.Teacher
 import u02.Optionals.Option.getOrElse
 import u03.Lists.List._
 
@@ -32,6 +34,11 @@ object Lists {
   def max(list: List[Int]): Option[Int] = list match {
     case Cons(h, t) => Some(Math.max(h, getOrElse(max(t), Int.MinValue)))
     case _ => None()
+  }
+
+  def getTeacherCourses(list: List[Person]): List[String] = flatMap(list){
+    case Teacher(_, course) => Cons(course, Nil())
+    case _ => Nil()
   }
 
 }
