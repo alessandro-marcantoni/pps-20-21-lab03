@@ -62,4 +62,11 @@ class ListsTest {
     )
   }
 
+  @Test
+  def foldTest(): Unit = {
+    val foldList = Cons(3,Cons(7,Cons(1,Cons(5, Nil()))))
+    assertEquals(-16, foldLeft(foldList)(0)(_-_))
+    assertEquals(-8, foldRight(foldList)(0)(_-_))
+  }
+
 }
