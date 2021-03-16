@@ -22,4 +22,12 @@ class StreamsTest {
       Stream.toList(Stream.take(Streams.constant("x"))(5)))
   }
 
+  @Test
+  def fibonacciTest(): Unit = {
+    val fibs: Stream[Int] = Streams.fibonacci()
+    assertEquals(
+      Cons(0, Cons(1, Cons(1, Cons(2, Cons(3, Cons(5, Cons(8, Cons(13, Nil())))))))),
+      Stream.toList(Stream.take(fibs)(8)))
+  }
+
 }

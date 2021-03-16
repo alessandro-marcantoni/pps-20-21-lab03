@@ -13,10 +13,10 @@ object Lists {
   import u03.Lists._
 
   @tailrec
-  def drop[A](list: List[A], n: Int): List[A] = list match {
-    case Cons(_, t) if n > 0 => drop(t, n-1)
-    case Cons(h, t) if n <= 0 => Cons(h, t)
-    case _ => Nil()
+  def drop[A](list: List[A], n: Int): List[A] = (list,n) match {
+    case (list, 0) => list
+    case (Cons(_, t), n) => drop(t, n-1)
+    case (Nil(), _) => Nil()
   }
 
   def flatMap[A,B](list: List[A])(mapper: A => List[B]): List[B] = list match {
