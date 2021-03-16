@@ -41,13 +41,14 @@ object Lists {
     case _ => Nil()
   }
 
-  def foldRight[A,B](list: List[A])(base: B)(aggregator: (A,B) => B): B = list match {
-    case Cons(h, t) => aggregator(h, foldRight(t)(base)(aggregator))
-    case Nil() => base
+  @tailrec
+  def foldLeft[A,B](list: List[A])(base: B)(aggregator: (B,A) => B): B = list match {
+    case Cons(h, t) => foldLeft(t)(aggregator(base, h))(aggregator)
+    case _ => base
   }
 
-  def foldLeft[A,B](list: List[A])(base: B)(aggregator: (B,A) => B): B = list match {
-    case Cons(h, t) => aggregator(foldLeft(t)(base)(aggregator), h)
+  def foldRight[A,B](list: List[A])(base: B)(aggregator: (A,B) => B): B = list match {
+    case Cons(h, t) => aggregator(h, foldRight(t)(base)(aggregator))
     case Nil() => base
   }
 
