@@ -11,4 +11,6 @@ object Streams {
     case _ => empty()
   }
 
+  def constant[A](k: A): Stream[A] = cons(k, constant(k))
+
 }

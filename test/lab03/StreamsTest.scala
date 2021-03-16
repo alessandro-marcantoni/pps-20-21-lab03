@@ -15,4 +15,11 @@ class StreamsTest {
       Stream.toList(Streams.drop(s)(6)))
   }
 
+  @Test
+  def constantTest(): Unit = {
+    assertEquals(
+      Cons("x", Cons("x", Cons("x", Cons("x", Cons("x", Nil()))))),
+      Stream.toList(Stream.take(Streams.constant("x"))(5)))
+  }
+
 }
