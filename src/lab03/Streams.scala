@@ -11,10 +11,11 @@ object Streams {
   def drop[A](stream: Stream[A])(n: Int): Stream[A] = (stream, n) match {
     case (stream, 0) => stream
     case (Cons(_, ft), n) => drop(ft())(n-1)
-    case (Empty(), _) => empty()
+    case (_, _) => empty()
   }
 
   def constant[A](k: A): Stream[A] = cons(k, constant(k))
+  //def constant[A](k: A): Stream[A] = iterate(k)(k => k)
 
   def fibonacci(): Stream[Int] = {
     def _fib(prev: Int, curr: Int): Stream[Int] = cons(prev, _fib(curr, prev+curr))
