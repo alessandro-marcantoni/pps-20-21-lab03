@@ -8,18 +8,18 @@ import u03.Lists.List._
 import scala.annotation.tailrec
 
 object Lists {
-  import u02.Optionals.Option.{Some,None}
+
+  import u02.Optionals.Option.{Some, None}
   import u02.Optionals._
   import u03.Lists._
 
   @tailrec
   def drop[A](list: List[A], n: Int): List[A] = (list, n) match {
-    case (list, 0) => list
-    case (Cons(_, t), n) => drop(t, n-1)
-    case (_, _) => Nil()
+    case (Cons(_, t), n) if n > 0 => drop(t, n - 1)
+    case (list, _) => list
   }
 
-  def flatMap[A,B](list: List[A])(mapper: A => List[B]): List[B] = list match {
+  def flatMap[A, B](list: List[A])(mapper: A => List[B]): List[B] = list match {
     case Cons(h, t) => append(mapper(h), flatMap(t)(mapper))
     case _ => Nil()
   }
@@ -36,18 +36,18 @@ object Lists {
     case _ => None()
   }
 
-  def getTeacherCourses(list: List[Person]): List[String] = flatMap(list){
+  def getTeacherCourses(list: List[Person]): List[String] = flatMap(list) {
     case Teacher(_, course) => Cons(course, Nil())
     case _ => Nil()
   }
 
   @tailrec
-  def foldLeft[A,B](list: List[A])(base: B)(aggregator: (B,A) => B): B = list match {
+  def foldLeft[A, B](list: List[A])(base: B)(aggregator: (B, A) => B): B = list match {
     case Cons(h, t) => foldLeft(t)(aggregator(base, h))(aggregator)
     case _ => base
   }
 
-  def foldRight[A,B](list: List[A])(base: B)(aggregator: (A,B) => B): B = list match {
+  def foldRight[A, B](list: List[A])(base: B)(aggregator: (A, B) => B): B = list match {
     case Cons(h, t) => aggregator(h, foldRight(t)(base)(aggregator))
     case _ => base
   }
